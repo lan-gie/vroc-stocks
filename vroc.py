@@ -141,19 +141,4 @@ plt.tight_layout()
 # Display the plot
 st.pyplot(fig)
 
-
-
-
-
-# Calculate potential returns
-signals['Returns'] = signals['Close'].pct_change()
-signals['Strategy_Returns'] = signals['Signal'].shift(1) * signals['Returns']
-
-total_return = (1 + signals['Strategy_Returns']).prod() - 1
-sharpe_ratio = signals['Strategy_Returns'].mean() / signals['Strategy_Returns'].std() * (252 ** 0.5)
-
-st.subheader('Strategy Performance')
-st.write(f"Total Return: {total_return:.2%}")
-st.write(f"Sharpe Ratio: {sharpe_ratio:.2f}")
-
 st.warning("Note: This is a simplified simulation and should not be used for actual trading without further refinement and risk management.")
