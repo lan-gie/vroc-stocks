@@ -5,16 +5,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
-@st.cache_data
-def get_top_50_sp500():
-    try:
-        url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
-        tables = pd.read_html(url)
-        sp500 = tables[0]
-        return sp500['Symbol'].head(50).tolist()
-    except Exception as e:
-        st.error(f"Error fetching S&P 500 data: {e}")
-        return []
+# Hard-coded top 50 S&P 500 stocks
+top_50_stocks = [
+    'AAPL', 'MSFT', 'AMZN', 'GOOGL', 'TSLA',
+    'BRK.B', 'NVDA', 'JPM', 'JNJ', 'META',
+    'V', 'PG', 'UNH', 'HD', 'DIS',
+    'PYPL', 'NFLX', 'VZ', 'ADBE', 'CMCSA',
+    'PEP', 'CSCO', 'INTC', 'T', 'NKE',
+    'MRK', 'XOM', 'PFE', 'TMO', 'ABT',
+    'AVGO', 'AMGN', 'COST', 'CRM', 'NVS',
+    'MDT', 'QCOM', 'HON', 'IBM', 'TXN',
+    'LMT', 'WMT', 'MMM', 'BA', 'SPGI',
+    'NOW', 'CVX', 'CAT', 'SBUX', 'BKNG'
+]
 
 def calculate_vroc(data, period=5):
     data['VROC'] = data['Volume'].pct_change(periods=period) * 100
@@ -45,14 +48,7 @@ def get_yesterday_data(ticker):
 
 st.set_page_config(layout="wide")
 
-st.title('VROC and RSI Day Trading Dashboard - Top 50 S&P 500 Stocks')
-
-# Get top 50 S&P 500 stocks
-top_50_stocks = get_top_50_sp500()
-
-if not top_50_stocks:
-    st.error("Unable to fetch stock data. Please try again later.")
-    st.stop()
+st.title('VROC and RSI Day Trading Dashboard - Top 50 Stocks')
 
 # Sidebar for stock selection
 selected_stock = st.sidebar.selectbox('Select a stock', top_50_stocks)
@@ -67,7 +63,6 @@ if data.empty:
 # Display basic info
 st.header(f"Analysis for {selected_stock}")
 st.subheader(f"Date: {data.index[0].date()}")
-
 
 # VROC and RSI trading signals
 st.sidebar.subheader('Trading Signal Parameters')
