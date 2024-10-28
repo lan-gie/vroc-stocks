@@ -1,7 +1,7 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
-# import schedule
+import schedule
 import time
 import ollama
 from datetime import datetime, timedelta
@@ -196,15 +196,15 @@ def get_natural_language_insights(
     print("Natural Language Insight:", response_text)
 
 # Schedule job to simulate receiving updates every minute
-# schedule.every(10).seconds.do(process_stock_update)  
+schedule.every(10).seconds.do(process_stock_update)  
 
 
-# message = st.chat_message("assistant")
-# message.write("Starting real-time simulation for AAPL stock updates. First update will be processed in 5 minutes...")    
-# # Run the scheduled jobs
-# print("Starting real-time simulation for AAPL stock updates...")
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+message = st.chat_message("assistant")
+message.write("Starting real-time simulation for AAPL stock updates. First update will be processed in 5 minutes...")    
+# Run the scheduled jobs
+print("Starting real-time simulation for AAPL stock updates...")
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 
