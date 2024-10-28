@@ -7,14 +7,31 @@ import ollama
 from datetime import datetime, timedelta
 
 # Streamlit UI
+st.set_page_config(layout="wide")
 st.title("AI Stock Advisor")
 logtxtbox = st.empty()
 logtxt = '09:30:00'
 logtxtbox.caption(logtxt)
 
+# Hard-coded top 50 S&P 500 stocks
+top_50_stocks = [
+    'IONQ', 'AAPL', 'MSFT', 'AMZN', 'GOOGL', 'TSLA',
+    'BRK.B', 'NVDA', 'JPM', 'JNJ', 'META',
+    'V', 'PG', 'UNH', 'HD', 'DIS',
+    'PYPL', 'NFLX', 'VZ', 'ADBE', 'CMCSA',
+    'PEP', 'CSCO', 'INTC', 'T', 'NKE',
+    'MRK', 'XOM', 'PFE', 'TMO', 'ABT',
+    'AVGO', 'AMGN', 'COST', 'CRM', 'NVS',
+    'MDT', 'QCOM', 'HON', 'IBM', 'TXN',
+    'LMT', 'WMT', 'MMM', 'BA', 'SPGI',
+    'NOW', 'CVX', 'CAT', 'SBUX', 'BKNG'
+]
+
+# Sidebar for stock selection
+selected_stock = st.sidebar.selectbox('Select a stock', top_50_stocks)
 
 # Fetching historical data for Stock (TICKER ex. IONQ) and Dow Jones (DJI) for yesterday (1-minute intervals)
-stock = yf.Ticker("IONQ")
+stock = yf.Ticker(selected_stock)
 dow_jones = yf.Ticker("^DJI")
 data = stock.history(period="1d", interval="1m")
 dow_data = dow_jones.history(period="1d", interval="1m")
