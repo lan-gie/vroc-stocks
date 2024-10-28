@@ -200,7 +200,7 @@ schedule.every(10).seconds.do(process_stock_update)
 
 
 message = st.chat_message("assistant")
-message.write("Starting real-time simulation for AAPL stock updates. First update will be processed in 5 minutes...")    
+message.write("Starting real-time simulation for chosen stock updates. First update will be processed in 5 minutes...")    
 # Run the scheduled jobs
 print("Starting real-time simulation for AAPL stock updates...")
 while True:
