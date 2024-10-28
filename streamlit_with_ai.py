@@ -13,8 +13,8 @@ logtxt = '09:30:00'
 logtxtbox.caption(logtxt)
 
 
-# Fetching historical data for Apple (AAPL) and Dow Jones (DJI) for yesterday (1-minute intervals)
-stock = yf.Ticker("AAPL")
+# Fetching historical data for Stock (TICKER ex. IONQ) and Dow Jones (DJI) for yesterday (1-minute intervals)
+stock = yf.Ticker("IONQ")
 dow_jones = yf.Ticker("^DJI")
 data = stock.history(period="1d", interval="1m")
 dow_data = dow_jones.history(period="1d", interval="1m")
@@ -156,7 +156,7 @@ def get_natural_language_insights(
 
 ):
     prompt = f"""
-    You are a professional stock broker. Apple's stock has a 5-minute rolling average of {rolling_avg:.2f}.
+    You are a professional stock broker. {stock}'s stock has a 5-minute rolling average of {rolling_avg:.2f}.
     The Exponential Moving Average (EMA) is {ema:.2f}, and the Relative Strength Index (RSI) is {rsi:.2f}.
     The Bollinger Bands are set with an upper band of {bollinger_upper:.2f} and a lower band of {bollinger_lower:.2f}.
     The price has changed by {price_change:.2f}, and the volume has shifted by {volume_change}.
